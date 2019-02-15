@@ -1,8 +1,7 @@
-import React, { Component, useEffect } from 'react';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
 
-const PropTypes = {
+const propTypes = {
 	isLogin: PropTypes.bool.isRequired,
 	history: PropTypes.object.isRequired,
 };
@@ -21,6 +20,6 @@ const CheckLogin = (props) => {
 	return props.children;
 };
 
-CheckLogin.propTypes = PropTypes;
+CheckLogin.propTypes = propTypes;
 
 export default CheckLogin;

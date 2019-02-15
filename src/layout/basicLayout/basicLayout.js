@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
+import CheckLogin from './../../hoc/checkLogin';
 
-class BasicLayout extends React.PureComponent {
+class BasicLayout extends PureComponent {
 	render() {
 		return (
-			<div>
+			<CheckLogin isLogin={ true } history={ this.props.history }>
 				<div>basicLayout</div>
 				<div> { this.props.children } </div>
-			</div>
+			</CheckLogin>
 		)
 	}
 }

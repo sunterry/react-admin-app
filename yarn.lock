@@ -8811,13 +8811,6 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-acl-router@^0.2.5:
-  version "0.2.5"
-  resolved "http://registry.npm.taobao.org/react-acl-router/download/react-acl-router-0.2.5.tgz#c352463fbdb60f71da4c05f33edee587f56ed574"
-  integrity sha1-w1JGP722D3HaTAXzPt7lh/Vu1XQ=
-  dependencies:
-    prop-types "^15.6.1"
-
 react-app-polyfill@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/react-app-polyfill/-/react-app-polyfill-0.2.1.tgz#96c701a40b9671c8547f70bdbb4a47f4d5767790"
