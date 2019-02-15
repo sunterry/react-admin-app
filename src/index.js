@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import App from '@/views/app/app';
 import * as serviceWorker from './serviceWorker';
 
+console.log(process.env.NODE_ENV);
+
+if (process.env.NODE_ENV === 'development') require('@/mock');
 
 const root = document.getElementById('root');
 
