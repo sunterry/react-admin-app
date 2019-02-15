@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { map, isNil } from 'lodash';
@@ -17,40 +17,7 @@ const DefaultNotFound = Loadable({
 	loading: Loading,
 });
 
-const propTypes = {
-	authorities: PropTypes.oneOfType([
-		PropTypes.string,
-		PropTypes.array,
-		PropTypes.func,
-	]),
-	normalRoutes: PropTypes.arrayOf(PropTypes.shape({
-		path: PropTypes.string,
-		redirect: PropTypes.string,
-		component: PropTypes.func,
-	})),
-	normalLayout: PropTypes.func,
-	authorizedRoutes: PropTypes.arrayOf(PropTypes.shape({
-		path: PropTypes.string(),
-		permission: PropTypes.arrayOf(PropTypes.string),
-		component: PropTypes.func,
-		redirect: PropTypes.string,
-		unauthorized: PropTypes.func,
-	})),
-	authorizedLayout: PropTypes.func,
-	notFound: PropTypes.func,
-};
-
-const defaultProps = {
-	authorities: '',
-	normalRoutes: [],
-	normalLayout: DefaultLayout,
-	authorizedLayout: DefaultLayout,
-	authorizedRoutes: [],
-	notFound: DefaultNotFound,
-};
-
-
-class RouterContainer extends React.Component {
+class RouterContainer extends Component {
 
 	constructor(props) {
 		super(props);
@@ -58,6 +25,41 @@ class RouterContainer extends React.Component {
 		this.renderUnAuthorizedRoute = this.renderUnAuthorizedRoute.bind(this);
 		this.renderNotFoundRoute = this.renderNotFoundRoute.bind(this);
 		this.renderAuthorizedRoute = this.renderAuthorizedRoute.bind(this);
+	};
+
+	static defaultProps = {
+		authorities: '',
+		normalRoutes: [],
+		normalLayout: DefaultLayout,
+		authorizedLayout: DefaultLayout,
+		authorizedRoutes: [],
+		notFound: DefaultNotFound,
+	};
+
+	static propTypes = {
+		authorities: PropTypes.oneOfType([
+			PropTypes.string,
+			PropTypes.array,
+			PropTypes.func,
+		]),
+	  normalRoutes: PropTypes.arrayOf(PropTypes.shape({
+			path: PropTypes.string,
+			redirect: PropTypes.string,
+			component: PropTypes.func,
+		})),
+		authorizedRoutes: PropTypes.arrayOf(PropTypes.shape({
+			path: PropTypes.string,
+			permission: PropTypes.arrayOf(PropTypes.string),
+			component: PropTypes.func,
+			redirect: PropTypes.string,
+			unauthorized: PropTypes.func,
+		})),
+		normalLayout: PropTypes.oneOfType([
+			PropTypes.func,
+			PropTypes.object,
+		]),
+		authorizedLayout: PropTypes.func,
+		notFound: PropTypes.func,
 	};
 
 	/**
@@ -156,8 +158,5 @@ class RouterContainer extends React.Component {
 		)
 	}
 }
-
-RouterContainer.propsTypes = propTypes;
-RouterContainer.defaultProps = defaultProps;
 
 export default RouterContainer;

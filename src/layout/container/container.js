@@ -1,15 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import AclRouter from 'react-acl-router';
+import RouterContainer from '@/layout/routerContainer'
 import { authorizedRoutes, normalRoutes } from '@/router/routes';
+import BasicLayout from '@/layout/basicLayout';
+import NormalLayout from '@/layout/normalLayout';
+import NotFound from '@/layout/notFound';
 
 export default () => {
 	return (
-		<div>
-			<AclRouter
-				authorizedRoutes={authorizedRoutes}
-				normalRoutes={normalRoutes}
-			/>
-		</div>
+		<RouterContainer
+			authorizedRoutes={ authorizedRoutes }
+			normalRoutes={ normalRoutes }
+			authorizedLayout={ BasicLayout }
+			normalLayout={ NormalLayout }
+			notFound={ NotFound }
+		/>
 	)
 }
