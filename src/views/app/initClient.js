@@ -1,10 +1,8 @@
-import Cookie from 'js-cookie';
-import { isNil } from 'lodash';
 import { getLocal } from '@/utils/local/local.native';
 import { loginCreater } from '@/store/reducers/user'
 
 const initClient = (dispatch) => {
-	const isLogin = !isNil(getLocal('token'));
+	const isLogin = getLocal('token');
 	if (isLogin) {
 		const getLocalUser = localStorage.getItem('user');
 		const user = (getLocalUser && JSON.parse(getLocalUser)) || [];

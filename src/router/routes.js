@@ -16,6 +16,11 @@ const Table = Loadable({
 	loading: Loading,
 });
 
+const Unauthorized = Loadable({
+  loader: () => import('@/layout/unauthorized'),
+  loading: Loading,
+});
+
 
 const authorizedRoutes = [
 	{
@@ -23,13 +28,14 @@ const authorizedRoutes = [
 		exact: true,
 		permissions: [],
 		component: Home,
-		breadcrumb: ['/app'],
+		breadcrumb: ['app'],
 	},
 	{
 		path: '/ui/table',
 		exact: true,
-		permissions: [],
-		redirect: '/login',
+		permissions: ['table'],
+    unauthorized: Unauthorized,
+		// redirect: '/app',
 		component: Table,
 		breadcrumb: ['/app', '/ui', '/ui/table']
 	},
