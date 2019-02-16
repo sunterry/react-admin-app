@@ -1,5 +1,8 @@
 import React from 'react';
+import Exception from '@/components/exception';
 
 export default () => (
-	<div>notFound</div>
+	<div>
+    <Exception />
+  </div>
 );

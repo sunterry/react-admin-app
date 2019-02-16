@@ -2,20 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { map, isNil } from 'lodash';
-import Loadable from 'react-loadable';
-import Loading from '@/components/loading';
+import DefaultNotFound from './components/defaultNotFound';
+import DefaultLayout from './components/defaultLayout';
 import omitRouteRenderProperties from './utils/omitRouteRenderProperties';
 import checkPermissions from './utils/checkPermissions';
 
-const DefaultLayout = Loadable({
-	loader: () => import('./components/defaultLayout'),
-	loading: Loading,
-});
-
-const DefaultNotFound = Loadable({
-	loader: () => import('./components/defaultNotFound'),
-	loading: Loading,
-});
 
 class RouterContainer extends Component {
 

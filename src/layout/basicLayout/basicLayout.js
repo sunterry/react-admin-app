@@ -20,7 +20,7 @@ class BasicLayout extends PureComponent {
 	render() {
 	  const { isLogin, history, children } = this.props;
 		return (
-			<CheckLogin isLogin={ isLogin } history={ history }>
+			<CheckLogin style={{ height: '100%' }} isLogin={ isLogin } history={ history }>
 				<div> { children } </div>
 			</CheckLogin>
 		)
