@@ -1,7 +1,10 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Layout, Menu, Icon } from 'antd';
 import CheckLogin from '@/hoc/checkLogin';
+
+const { Header, Sider, Content } = Layout;
 
 const mapStateToProps = state => {
   return {
@@ -20,8 +23,20 @@ class BasicLayout extends PureComponent {
 	render() {
 	  const { isLogin, history, children } = this.props;
 		return (
-			<CheckLogin style={{ height: '100%' }} isLogin={ isLogin } history={ history }>
-				<div> { children } </div>
+			<CheckLogin
+        style={{ height: '100%' }}
+        isLogin={ isLogin }
+        history={ history }
+      >
+        <Layout>
+          <Sider />
+          <Layout>
+            <Header />
+            <Content>
+              { children }
+            </Content>
+          </Layout>
+        </Layout>
 			</CheckLogin>
 		)
 	}
