@@ -1,5 +1,4 @@
 import React from 'react';
+import Exception from '@/components/exception';
 
-export default () => (
-  <div>Unauthorized</div>
-);
+export default () => <Exception type="403" />;
