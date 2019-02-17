@@ -3,19 +3,27 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Layout } from 'antd';
 import cloneDeep from 'clone-deep';
+import { get, head } from 'lodash';
+import { matchRoutes } from 'react-router-config';
+import { combineRoutes } from '@/router/routes';
 import menuConfig from '@/router/menuConfig';
 import Sider from '@/layout/siderMenu';
 import Header from '@/layout/header';
 import Footer from '@/layout/footer';
+import BreadCrumb from '@/layout/breadCrumb';
 import CheckLogin from '@/hoc/checkLogin';
 import { setCollapsed } from '@/store/reducers/app';
+import b from './basicLayout.module.scss';
 
 const { Content } = Layout;
 
 const mapStateToProps = state => {
+  const pathname = get(state, 'router.location.pathname', '');
+  const { route } = head((matchRoutes(combineRoutes, pathname)));
   return {
     isLogin: state.user.isLogin,
-    collapsed: state.app.collapsed
+    collapsed: state.app.collapsed,
+    route,
   }
 };
 
@@ -32,6 +40,7 @@ class BasicLayout extends PureComponent {
     isLogin: PropTypes.bool.isRequired,
     history: PropTypes.object.isRequired,
     collapsed: PropTypes.bool.isRequired,
+    route: PropTypes.object.isRequired,
   };
 
   toggle() {
@@ -39,7 +48,7 @@ class BasicLayout extends PureComponent {
   };
 
 	render() {
-	  const { isLogin, history, children, collapsed, location } = this.props;
+	  const { isLogin, history, children, collapsed, location, route } = this.props;
     const iconType = collapsed ? 'menu-unfold' : 'menu-fold';
 		return (
 			<CheckLogin
@@ -61,8 +70,11 @@ class BasicLayout extends PureComponent {
               toggle={ this.toggle }
               iconType= { iconType }
             />
-            <Content>
-              { children }
+            <Content style={{ margin: '0px 16px' }}>
+              <BreadCrumb route={route}/>
+              <div className={ b.content } >
+                { children }
+              </div>
             </Content>
             <Footer />
           </Layout>

@@ -28,7 +28,7 @@ const authorizedRoutes = [
 		exact: true,
 		permissions: [],
 		component: Home,
-		breadcrumb: ['app'],
+    name: '首页',
 	},
 	{
 		path: '/ui/table',
@@ -37,7 +37,9 @@ const authorizedRoutes = [
     unauthorized: Unauthorized,
 		// redirect: '/app',
 		component: Table,
-		breadcrumb: ['/app', '/ui', '/ui/table']
+		breadcrumb: ['/ui/table'],
+    name: '表格',
+    icon: 'tablet',
 	},
 ];
 
