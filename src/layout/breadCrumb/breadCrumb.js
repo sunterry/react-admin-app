@@ -9,11 +9,14 @@ import generateBreadcrumb from './utils/generateBreadcrumb';
 const { Item } = Breadcrumb;
 
 const BreadCrumbs = (props) => {
-  const { route: { breadcrumb } } = props;
+  const { route: { breadcrumb }, separator } = props;
   const breadcrumbData = generateBreadcrumb(breadcrumb);
 
   return (
-    <Breadcrumb className={ b.beradCrumb }>
+    <Breadcrumb
+      className={ b.beradCrumb }
+      separator={ separator }
+    >
       {
         map(breadcrumbData, (item, index) => (
           index === breadcrumbData.length - 1 ?
@@ -22,8 +25,10 @@ const BreadCrumbs = (props) => {
               <span>{ item.name }</span>
             </Item>
             : <Item key={ item.path }>
-              { item.icon && <Icon type={ item.icon } /> }
-              <span>{ item.name }</span>
+              <Link to={ item.path }>
+                { item.icon && <Icon type={ item.icon } /> }
+                <span> { item.name } </span>
+              </Link>
             </Item>
         ))
       }
@@ -33,6 +38,10 @@ const BreadCrumbs = (props) => {
 
 BreadCrumbs.propTypes = {
   route: PropTypes.object.isRequired,
+};
+
+BreadCrumbs.defaultProps = {
+  separator: '/',
 };
 
 export default BreadCrumbs;

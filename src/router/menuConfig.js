@@ -5,8 +5,8 @@ export default [
     path: 'app',
   },
   {
-    name: 'ui',
-    icon: 'home',
+    name: '组件',
+    icon: 'tablet',
     path: 'ui',
     children: [
       {
