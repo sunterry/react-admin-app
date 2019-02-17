@@ -5,9 +5,12 @@ import { Layout } from 'antd';
 import cloneDeep from 'clone-deep';
 import menuConfig from '@/router/menuConfig';
 import Sider from '@/layout/siderMenu';
+import Header from '@/layout/header';
+import Footer from '@/layout/footer';
 import CheckLogin from '@/hoc/checkLogin';
+import { setCollapsed } from '@/store/reducers/app';
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
 const mapStateToProps = state => {
   return {
@@ -16,12 +19,13 @@ const mapStateToProps = state => {
   }
 };
 
-@connect(mapStateToProps, null)
+@connect(mapStateToProps, { setCollapsed })
 class BasicLayout extends PureComponent {
 
   constructor(props) {
     super(props);
     this.menuConfig = cloneDeep(menuConfig);
+    this.toggle = this.toggle.bind(this);
   }
 
   static propTypes = {
@@ -30,8 +34,13 @@ class BasicLayout extends PureComponent {
     collapsed: PropTypes.bool.isRequired,
   };
 
+  toggle() {
+    this.props.setCollapsed(!this.props.collapsed);
+  };
+
 	render() {
 	  const { isLogin, history, children, collapsed, location } = this.props;
+    const iconType = collapsed ? 'menu-unfold' : 'menu-fold';
 		return (
 			<CheckLogin
         style={{ height: '100%' }}
@@ -48,10 +57,14 @@ class BasicLayout extends PureComponent {
             appLogo="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9Ii0xMS41IC0xMC4yMzE3NCAyMyAyMC40NjM0OCI+CiAgPHRpdGxlPlJlYWN0IExvZ288L3RpdGxlPgogIDxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjA1IiBmaWxsPSIjNjFkYWZiIi8+CiAgPGcgc3Ryb2tlPSIjNjFkYWZiIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIi8+CiAgICA8ZWxsaXBzZSByeD0iMTEiIHJ5PSI0LjIiIHRyYW5zZm9ybT0icm90YXRlKDYwKSIvPgogICAgPGVsbGlwc2Ugcng9IjExIiByeT0iNC4yIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjApIi8+CiAgPC9nPgo8L3N2Zz4K"
           />
           <Layout>
-            <Header />
+            <Header
+              toggle={ this.toggle }
+              iconType= { iconType }
+            />
             <Content>
               { children }
             </Content>
+            <Footer />
           </Layout>
         </Layout>
 			</CheckLogin>
