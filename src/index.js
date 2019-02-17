@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from '@/views/app/app';
 import * as serviceWorker from './serviceWorker';
+import './index.scss'
 
 if (process.env.NODE_ENV === 'development') require('@/mock');
 
