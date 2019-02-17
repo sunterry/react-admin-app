@@ -3,6 +3,7 @@ import { Layout, Menu, Icon } from 'antd';
 import memoize from 'memoize-one';
 import PropTypes from 'prop-types';
 import { map } from 'lodash';
+import Logo from '@/layout/logo';
 import formatMenuPath from './utils/formatMenuPath';
 import getFlatMenuKeys from './utils/getFlatMenuKeys';
 import getMenuMatchKeys from './utils/getMenuMatchKeys';
@@ -34,6 +35,8 @@ class SiderMenu extends React.PureComponent {
     collapsed: false,
     menuConfig: [],
     pathname: '',
+    appBaseUrl: '/app',
+    appName: 'React Admin',
   };
 
   static propTypes = {
@@ -48,6 +51,9 @@ class SiderMenu extends React.PureComponent {
     history: PropTypes.shape({
       push: PropTypes.func.isRequired,
     }),
+    appBaseUrl: PropTypes.string,
+    appName: PropTypes.string,
+    appLogo: PropTypes.string
   };
 
   renderMenu = data => map(data, item => {
@@ -86,7 +92,7 @@ class SiderMenu extends React.PureComponent {
   };
 
   render() {
-    const { collapsed, pathname, menuConfig } = this.props;
+    const { collapsed, pathname, menuConfig, appBaseUrl, appName, appLogo } = this.props;
     const { openKeys } = this.state;
     return (
       <Sider
@@ -94,7 +100,14 @@ class SiderMenu extends React.PureComponent {
         collapsible
         collapsed={collapsed}
       >
+        <Logo
+          appBaseUrl={ appBaseUrl }
+          appLogo={ appLogo }
+          appName={ appName }
+          collapsed={ collapsed }
+        />
         <Menu
+          style={{  width: '100%' }}
           mode="inline"
           theme="dark"
           openKeys={openKeys}

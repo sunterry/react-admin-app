@@ -1,0 +1,18 @@
+.container {
+  height: 64px;
+  width: 100%;
+  line-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  .logo {
+    width: 32px;
+    height: 32px;
+  }
+  .title {
+    font-size: 20px;
+    color: #fff;
+    padding-left: 4px;
+  }
+}
