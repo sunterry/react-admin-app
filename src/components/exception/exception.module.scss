@@ -1,8 +1,8 @@
 .exception {
   display: flex;
   align-items: center;
-  height: 100vh;
-
+  height: calc(100% - 180px);
+  min-height: 400px;
   .imgBlock {
     flex: 0 0 62.5%;
     width: 62.5%;
